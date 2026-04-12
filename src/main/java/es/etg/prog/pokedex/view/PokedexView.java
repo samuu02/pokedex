@@ -1,30 +1,37 @@
 package es.etg.prog.pokedex.view;
+
 import java.util.Scanner;
 
+/**
+ * Clase encargada de la interacción con el usuario.
+ */
+
 public class PokedexView {
-
-    private Scanner scanner;
     
-    public static final String MENU_TITULO = "====POKEDEX====";
-    public static final String OPCION_1 = "1. Ver pokemon.";
-    public static final String OPCION_2 = "2. Buscar pokemon.";
-    public static final String OPCION_SALIR = "0. Salir.";
-    public static final String PEDIR_OPCION = "Elige una opción: ";
+    public static final int OPC_MENU_VER = 1;
+    public static final int OPC_MENU_BUSCAR = 2;
+    public static final int OPC_MENU_SALIR = 0;
 
-    public static final String OPCION_1_VALOR = "1";
-    public static final String OPCION_2_VALOR = "2";
-    public static final String SALIR_VALOR = "0";
-    
+    private static final String MENU =
+            "===== POKEDEX =====%n" +
+            "%d. Ver Pokémon%n" +
+            "%d. Buscar Pokémon%n" +
+            "%d. Salir%n" +
+            "Selecciona una opción: ";
+
+    private final Scanner scanner;
+
     public PokedexView() {
         this.scanner = new Scanner(System.in);
     }
 
-    public String mostrarMenu() {
-        return MENU_TITULO + "\n" +
-        OPCION_1 + "\n" +
-        OPCION_2 + "\n" +
-        OPCION_SALIR + "\n" +
-        PEDIR_OPCION;
+    public void mostrarMenu() {
+        System.out.print(String.format(
+                MENU,
+                OPC_MENU_VER,
+                OPC_MENU_BUSCAR,
+                OPC_MENU_SALIR
+        ));
     }
 
     public String leerString() {
@@ -32,7 +39,6 @@ public class PokedexView {
     }
 
     public int leerEntero() {
-        int entero = scanner.nextInt();
-        return entero;
+        return Integer.parseInt(leerString());
     }
 }

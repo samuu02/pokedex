@@ -1,35 +1,44 @@
 package es.etg.prog.pokedex.controller;
 
 import es.etg.prog.pokedex.view.PokedexView;
+import lombok.RequiredArgsConstructor;
 
+/**
+ * Controlador principal de la aplicación.
+ */
+@RequiredArgsConstructor
 public class PokedexController {
-    
-    private PokedexView vista;
 
-    public PokedexController(PokedexView vista) {
-        this.vista = vista;
-    }
+    private final PokedexView vista;
 
     public void init() {
-        String opcion;
-        do {
-            System.out.print(vista.mostrarMenu());
-            opcion = vista.leerString();
+
+        boolean salir = false;
+        int opcion;
+
+        while (!salir) {
+
+            vista.mostrarMenu();
+            opcion = vista.leerEntero();
 
             switch (opcion) {
-                case PokedexView.OPCION_1_VALOR:
-                    System.out.println("Has elegido la opción 1.");
-                    break;
-                case PokedexView.OPCION_2_VALOR:
-                    System.out.println("Has elegido la opción 2.");
-                    break;
-                case PokedexView.SALIR_VALOR:
-                    System.out.println("Saliendo del menú..."); 
-                    break;
-                default:
-                    System.out.println("Opción no válida.");
-                }
-        } while (!opcion.equals(PokedexView.SALIR_VALOR));
 
-    }  
+                case PokedexView.OPC_MENU_VER -> {
+                    System.out.println("Mostrando Pokémon...");
+                }
+
+                case PokedexView.OPC_MENU_BUSCAR -> {
+                    System.out.println("Buscando Pokémon...");
+                }
+
+                case PokedexView.OPC_MENU_SALIR -> {
+                    salir = true;
+                }
+
+                default -> {
+                    System.out.println("Opción no válida");
+                }
+            }
+        }
+    }
 }
